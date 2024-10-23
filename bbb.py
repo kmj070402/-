@@ -37,16 +37,33 @@ def main():
 
         x1 = x1 + v1 * dt
         x2 = x2 - v2 * dt
-
-
-
-
-
-
+        
         pygame.display.update()
 
+        if x2 - x1 <= 60:
+            while run:
+                DISPLAY.fill((255,255,255))
+                pygame.draw.line(DISPLAY, (150,200,225), (0, 558), (1000, 558),60)
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        run = False
+                    
+                v1_f = ((m1 - m2) * v1 + 2 * m2 * v2) / (m1 + m2)
+                v2_f = ((m2 - m1) * v2 + 2 * m1 * v1) / (m1 + m2)
+                
+                pygame.draw.circle(DISPLAY ,(0, 0, 255), (x1, 500), 30)
+                pygame.draw.circle(DISPLAY ,(255, 0, 0), (x2, 500), 30)
+            
+                x1 = x1 - v1_f * dt
+                x2 = x2 + v2_f * dt
+
+                pygame.display.update()
+       
+    
+        
+           
 if __name__ == "__main__":
-    main()
+    main()     
     pygame.quit()
     
 
